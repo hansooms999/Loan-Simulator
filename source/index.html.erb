@@ -8,25 +8,32 @@ $(document).ready(function(){
     var maxField = 10; //Input fields increment limitation
     var addButton = $('.add-button'); //Add button selector
     var wrapper = $('.field-wrapper'); //Input field wrapper
-    var fieldHTML = `
-    
-  <div class="loan-input">
-    <div class="loan-balance">
-      <label>Loan Balance:</label>
-      <input type = "text" name="principal${x}" id = "principal${x}"  />
-    </div>
-    <div class="interest-rate">
-      <label>Interest Rate:</label>
-      <input type = "text" name="interestRate${x}" id = "interestRate${x}" />
-    </div>
-    </div>` //New input field html 
     var x = 1; //Initial field counter is 1
+
     
     //Once add button is clicked
     $(addButton).click(function(){
         //Check maximum number of input fields
         if(x < maxField){ 
             x++; //Increment field counter
+            var fieldHTML = `
+          <div class="loan-input">
+            <h5>Loan ${x}:</h5>
+            <div class="loan-balance">
+              <label for="loan-balance">Loan Balance:</label>
+              <input type = "number" class="principal" name="principal" required />
+            </div>
+            <div class="interest-rate">
+              <label for="interest-rate">Interest Rate:</label>
+              <input type = "number" class="interest" name="interestRate"required />
+            </div>
+            <div class="subsidized-option">
+              <label for="subsidize-option">Subsidized:</label>
+              <input type = "radio" class="subsidized" name="subsidize${x}" value="unsubsidized" required >Unsubsidized</input>
+              <input type = "radio" class="subsidized" name="subsidize${x}" value="subsidized">Subsidized</input>
+              <label class="graduation-date reveal-active" for="graduation-date">Graduation Month:</label>
+              <input class="graduation-date reveal-active" type="month" name="graduation-month" value="2020-05">
+            </div>` //New input field html 
             $(wrapper).append(fieldHTML); //Add field html
         }
     });
@@ -41,25 +48,34 @@ $(document).ready(function(){
 </script>
 
 
+
+
 <h1>Enter Loans</h1>
  <form action="/payment_page.php" target="_blank">
   <fieldset class="field-wrapper">
   <div class="loan-input">
+    <h5>Loan 1:</h5>
     <div class="loan-balance">
-      <label>Loan Balance:</label>
-      <input type = "text" name="principal" id = "principal"  />
+      <label for="loan-balance">Loan Balance:</label>
+      <input type = "number" class="principal" name="principal" required />
     </div>
     <div class="interest-rate">
-      <label>Interest Rate:</label>
-      <input type = "text" name="interestRate" id = "interestRate" />
+      <label for="interest-rate">Interest Rate:</label>
+      <input type = "number" class="interest" name="interestRate" required />
     </div>
-  </div>
+    <div class="subsidized-option">
+      <label for="subsidize-option">Subsidized:</label>
+      <input type = "radio" class="subsidized" name="subsidize1" value="unsubsidized" required>Unsubsidized</input>
+      <input type = "radio" class="subsidized" name="subsidize1" value="subsidized">Subsidized</input>
+      <label class="reveal-active" for="graduation-date">Graduation Month:</label>
+      <input class="graduation-date reveal-active" type="month" name="graduation-month" value="2020-05">
+    </div>
     </fieldset>
     <div class="button-block">
       <button type="button" class="btn btn-primary btn-circle btn-sm add-button">+</a>
     </div>
     <div class="button-block">
-      <button type="button" class="btn btn-primary calculate-button" onclick = "loadPayments()">Calculate</button>
+      <input type="submit" type="button"  class="btn btn-primary calculate-button" value="Calculate" onclick="sendData()"></input>
     </div>
-  
+  </div>
  </form>
