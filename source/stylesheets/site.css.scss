@@ -18,7 +18,24 @@ a {
   }
 }
 
+.loan-input {
+  margin: 20px;
+}
+
+.btn-circle.btn-sm {
+  width: 35px;
+  height: 35px;
+  border-radius: 30px;
+  font-size: 15px;
+}
+
 .middleman-logo {
   margin-bottom: 1rem;
   width: 10rem;
+}
+
+.calculate-button {
+  position: fixed;
+  bottom: 5vh;
+  transform: translateX(-50%);
 }
