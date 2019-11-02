@@ -1,12 +1,19 @@
-<div id = "test">
-	<button v-on:click="counter += 1">Add 1</button>
-	<p>The button above has been clicked {{ counter }} times.</p>
-</div>
+<input id="monthlyPayment" placeholder="Enter monthly payment">
+<input id="numOfYears" placeholder="Enter number of years">
+<button type="button" onclick="submit()">submit</button>
+
+<p id="demo"></p>
+
 <script>
-	var example1 = new Vue({
-		el: '#test',
-		data: {
-		counter: 0
-		}
-	})
+function submit() {
+	var x, y;
+
+	// Get the values of the input fields
+	x = document.getElementById("monthlyPayment").value;
+	y = document.getElementById("numOfYears").value;
+
+	document.getElementById("demo").innerHTML = x + ", " + y;
+}
 </script>
+
+
