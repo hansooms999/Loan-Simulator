@@ -3,7 +3,7 @@ title: Loan Simulator
 ---
 
 <h1>Enter Loans</h1>
- <form target="_blank">
+ <form target="output.html">
   <fieldset class="field-wrapper">
   <div class="loan-input">
     <h5>Loan 1:</h5>
@@ -27,7 +27,7 @@ title: Loan Simulator
       <button type="button" class="btn btn-primary btn-circle btn-sm add-button">+</a>
     </div>
     <div class="button-block">
-      <input type="submit" type="button"  class="btn btn-primary calculate-button" value="Calculate" onclick="sendData()"></input>
+      <input type="submit" type="button"  class="btn btn-primary calculate-button" value="Calculate" onclick="sendData(); window.location.href='output.html'"></input>
     </div>
   </div>
  </form>
