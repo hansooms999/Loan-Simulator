@@ -2,56 +2,8 @@
 title: Loan Simulator
 ---
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-    var maxField = 10; //Input fields increment limitation
-    var addButton = $('.add-button'); //Add button selector
-    var wrapper = $('.field-wrapper'); //Input field wrapper
-    var x = 1; //Initial field counter is 1
-
-    
-    //Once add button is clicked
-    $(addButton).click(function(){
-        //Check maximum number of input fields
-        if(x < maxField){ 
-            x++; //Increment field counter
-            var fieldHTML = `
-          <div class="loan-input">
-            <h5>Loan ${x}:</h5>
-            <div class="loan-balance">
-              <label for="loan-balance">Loan Balance:</label>
-              <input type = "number" class="principal" name="principal" required />
-            </div>
-            <div class="interest-rate">
-              <label for="interest-rate">Interest Rate:</label>
-              <input type = "number" class="interest" name="interestRate"required />
-            </div>
-            <div class="subsidized-option">
-              <label for="subsidize-option">Subsidized:</label>
-              <input type = "radio" class="subsidized" name="subsidize${x}" value="unsubsidized" required >Unsubsidized</input>
-              <input type = "radio" class="subsidized" name="subsidize${x}" value="subsidized">Subsidized</input>
-              <label class="graduation-date reveal-active" for="graduation-date">Graduation Month:</label>
-              <input class="graduation-date reveal-active" type="month" name="graduation-month" value="2020-05">
-            </div>` //New input field html 
-            $(wrapper).append(fieldHTML); //Add field html
-        }
-    });
-    
-    //Once remove button is clicked
-    $(wrapper).on('click', '.remove_button', function(e){
-        e.preventDefault();
-        $(this).parent('div').remove(); //Remove field html
-        x--; //Decrement field counter
-    });
-});
-</script>
-
-
-
-
 <h1>Enter Loans</h1>
- <form action="/payment_page.php" target="_blank">
+ <form target="_blank">
   <fieldset class="field-wrapper">
   <div class="loan-input">
     <h5>Loan 1:</h5>
