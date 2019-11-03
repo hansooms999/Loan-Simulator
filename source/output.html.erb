@@ -23,7 +23,8 @@
 function submit() {
         var payment, years, subsidy, principal, rate;
 	
-        // Get the values of the input fields
+        /* We want this to add another array to localStorage array and populate it with 
+		these values*/	
         payment = document.getElementById("monthlyPayment").value;
         years = document.getElementById("numOfYears").value;
 	rate = document.getElementById("rate").value;
@@ -32,50 +33,64 @@ function submit() {
 
 	document.getElementById("demo").innerHTML = x + ", " + y;
 
+	/*Couldn't figure out how to make new data fields in localStorage array, could keep
+		all potential info about line in its array in localStorage. Values can be
+		null for first page data*/
 
 }
 
 function makeChart() {
-var initial_data = JSON.parse(localStorage.getItem("loansArray"));
+	var initial_data = JSON.parse(localStorage.getItem("loansArray"));
 
-var x_axis = [];
+	var x_axis = [];
 
-var i, j;
-for (i=0; i< 30; i+=.5) {
-	x_axis.push(i);
+	var i, j;
+
+	//x-axis increments by .5
+	for (i=0; i< 30; i+=.5) {
+		x_axis.push(i);
 	
-}
+	}
 
-
+	//data represents final data given to plot to make graph. Array of arrays
 	var data = [];
 
 	data.length = initial_data.length;
 
-	console.log(initial_data);
-	console.log(initial_data[0]);
 
+	//iterates through localStorage array
 	for (i = 0; i< data.length; i++) {
 
-
+	
 	principal = initial_data[i][0];
+
+	//first value on y_axis is the original amount
 	y_axis = [principal];
+
+	//can be potentially added as a feature in an "advanced" menu option
 	var compound = 365;
+
 	var interest_rate = initial_data[i][1]/100;
 
+	//creates the y_axis values for individual array i in localStorage
 	for (j = 1; j < x_axis.length; j++) {
 		var val = y_axis[j-1]*Math.pow((1+interest_rate/compound), compound*.5)-6*50;
 		if (val > 0) {
 			y_axis.push(val);
 		} else {
 
+
 			/*on first instance of this, update parameter of line in local storage that
 				tracks year paid off, this will be displayed in lineInfo div created
 				in the makeLineInfo function*/
+
+			//did not get to editing localStorage array to have that data field yet
 			y_axis.push(0);
 		}
 	}
 
-
+		/*array with type and arguments that Plotly accepts, redeclared to avoid
+			aliasing*/
 		var temp = {
 			x: x_axis,
 			y: y_axis,
@@ -88,14 +103,17 @@ for (i=0; i< 30; i+=.5) {
 
 	Plotly.newPlot('Graph', data);
 
+	/*after graph is made, text boxes each describing the info of each line are made*/
 	makeLineInfo();  
 
 }
 
+/*creates a text box at bottom of the page for every line on the graph*/
 function makeLineInfo() {
 
 	var initial_data = JSON.parse(localStorage.getItem("loansArray"));
 
+	//container contains entire section
 	var container = document.createElement("DIV");
 	container.setAttribute("class", "container");
 	document.body.appendChild(container);	
@@ -104,6 +122,7 @@ function makeLineInfo() {
 	var i;
 	for (i = 0; i<initial_data.length; i++) { 
 
+		//lineInfo div is a wrapper that containes all information on line
 		var info = document.createElement("DIV");
 		info.setAttribute("class", "lineInfo");	
 
@@ -122,6 +141,9 @@ function makeLineInfo() {
 		var borrowed = document.createElement("P");
 		borrowed.innerText = "Amount Borrowed: " + initial_data[i][0];
 
+		//more items to be added
+
+		
 		info.appendChild(title);
 		info.appendChild(borrowed);
 		info.appendChild(yearFree);
@@ -132,7 +154,12 @@ function makeLineInfo() {
 	
 }
 
+//we make a call automatically to makeChart as soon as page loads here
 makeChart();
+
+/*we also want to call makeChart again in submit function. Currently submit function
+	needs to create a new LineArray in localStorage array so makeChart includes the 
+	new Line when it iterates through the localStorage*/
 
 </script>
 
