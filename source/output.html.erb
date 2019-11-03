@@ -2,8 +2,14 @@
 
 <div class= "newLine">
 	<h3>New Loan</h3>
-	<input id="principal" placeholder="Amount Borrowed">	
-	<input id="subsidy" placeholder="Subsidy ">
+	<input id="principal" placeholder="Amount Borrowed">
+	<br>	
+	<div class="subsidized-option">
+		<input type="radio" class="subsidized" name="subsidized" value="unsubsidized" required >Unsubsidized</input>
+		<input type="radio" class="subsidized" name="unsubsidized" value="subsidized">Subsidized</input>
+		<label class="reveal-active" for="graduation-date">Graduation Month:</label>
+		<input class="graduation-date reveal-active" type="month" name="graduation-month" value="2020-05">
+	</div>
 	<input id="rate" placeholder="Interest Rate">
 	<hr>
 	<input id="monthlyPayment" placeholder="Monthly payment">
@@ -15,27 +21,46 @@
 </div>
 
 
-
-
-
 <script>
 
 function submit() {
-        var payment, years, subsidy, principal, rate;
-	
-        /* We want this to add another array to localStorage array and populate it with 
-		these values*/	
-        payment = document.getElementById("monthlyPayment").value;
-        years = document.getElementById("numOfYears").value;
-	rate = document.getElementById("rate").value;
-	subsidy = document.getElementById("subsidy").value;
-	principal = document.getElementById("principal").value;
+	var payment, years, subsidy, principal, rate, month, monthlyPay, numOfYears;
+	var array = new Array();
 
-	document.getElementById("demo").innerHTML = x + ", " + y;
+	/* We want this to add another array to localStorage array and populate it with 
+	these values*/	
+	payment = document.getElementById("monthlyPayment").value;
+	years = document.getElementById("numOfYears").value;
+	rate = document.getElementById("rate").value;
+
+	var subsidized = document.getElementById("subsidized").checked;
+	var unsubsidized = document.getElementById("unsubsidized").checked;
+	if (subsidized && !unsubsidized) {
+		subsidy = subsized;
+		month = document.getElementById("graduation-date");
+	} else {
+		subsidy = unsubsidized;
+		month = 0;
+	}
+	principal = document.getElementById("principal").value;
+	monthlyPay = document.getElementById("monthlyPayment");
+	numOfYears = document.getElementById("numOfYears");
+
+	array.push(principal);
+	array.push(rate);
+	array.push(subsidy);
+	array.push(month);
+	array.push(numOfYears);
+	array.push(monthlyPay);
+
+	var tempArray = JSON.parse(localStorage.getItem("loansArray"));
+	tempArray.push(array);
+
+	localStorage.setItem("loansArray", JSON.stringify(tempArray));
 
 	/*Couldn't figure out how to make new data fields in localStorage array, could keep
-		all potential info about line in its array in localStorage. Values can be
-		null for first page data*/
+	all potential info about line in its array in localStorage. Values can be
+	null for first page data*/
 
 }
 
