@@ -6,7 +6,7 @@
 	<br>	
 	<div class="subsidized-option">
 		<input type="radio" class="subsidized" name="subsidized" value="unsubsidized" required >Unsubsidized</input>
-		<input type="radio" class="subsidized" name="unsubsidized" value="subsidized">Subsidized</input>
+		<input type="radio" class="subsidized" name="subsidized" value="subsidized">Subsidized</input>
 		<label class="reveal-active" for="graduation-date">Graduation Month:</label>
 		<input class="graduation-date reveal-active" type="month" name="graduation-month" value="2020-05">
 	</div>
@@ -33,18 +33,15 @@ function submit() {
 	years = document.getElementById("numOfYears").value;
 	rate = document.getElementById("rate").value;
 
-	var subsidized = document.getElementById("subsidized").checked;
-	var unsubsidized = document.getElementById("unsubsidized").checked;
-	if (subsidized && !unsubsidized) {
-		subsidy = subsized;
-		month = document.getElementById("graduation-date");
+	var subsidizedVal = $(`input[name="subsidize"]:checked`).val();
+	if (subsidizedVal == "subsidized") {
+		subsidy = true;
 	} else {
-		subsidy = unsubsidized;
-		month = 0;
+		subsidy = false;
 	}
 	principal = document.getElementById("principal").value;
-	monthlyPay = document.getElementById("monthlyPayment");
-	numOfYears = document.getElementById("numOfYears");
+	monthlyPay = document.getElementById("monthlyPayment").value;
+	numOfYears = document.getElementById("numOfYears").value;
 
 	array.push(principal);
 	array.push(rate);
