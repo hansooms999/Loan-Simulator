@@ -54,7 +54,7 @@ function submit() {
 	tempArray.push(array);
 
 	localStorage.setItem("loansArray", JSON.stringify(tempArray));
-
+	makeChart();
 	/*Couldn't figure out how to make new data fields in localStorage array, could keep
 	all potential info about line in its array in localStorage. Values can be
 	null for first page data*/
