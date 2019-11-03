@@ -26,7 +26,16 @@ $(document).ready(function() {
             <input type="radio" class="subsidized" name="subsidize${x}" value="subsidized">Subsidized</input>
             <label class="reveal-active" for="graduation-date">Graduation Month:</label>
             <input class="graduation-date reveal-active" type="month" name="graduation-month" value="2020-05">
-            </div>`; //New input field html
+            </div>
+                <div class="monthly-payment">
+      <label for="monthly-payment">Monthly Payment:</label>
+      <input type = "number" class="monthly" name="monthlyPayment" min="1" step="0.01" />
+    </div>
+    <p>OR</p>
+    <div class="years-freedom">
+      <label for="years-freedom">Years until Freedom:</label>
+      <input type = "number" class="years" name="yearsFreedom" min="1" step="0.01" />
+    </div>`; //New input field html
       $(wrapper).append(fieldHTML); //Add field html
     }
   });
@@ -44,6 +53,8 @@ $(document).ready(function() {
     var principals = document.getElementsByClassName("principal");
     var interests = document.getElementsByClassName("interest");
     var gradDate = document.getElementsByClassName("graduation-date");
+    var monthly = document.getElementsByClassName("monthly");
+    var years = document.getElementsByClassName("years");
 
     var arr = new Array(principals.length);
     for (var i = 0; i < principals.length; i++) {
@@ -61,11 +72,13 @@ $(document).ready(function() {
       } else {
         sub = false;
       }
-      arr[i] = new Array(4);
+      arr[i] = new Array(6);
       arr[i][0] = parseFloat(principals[i].value);
       arr[i][1] = parseFloat(interests[i].value);
       arr[i][2] = sub;
       arr[i][3] = date;
+      arr[i][4] = parseFloat(years[i].value);
+      arr[i][5] = parseFloat(monthly[i].value);
       //arr.push([principals[i].value, interests[i].value, sub, date]);
     }
 

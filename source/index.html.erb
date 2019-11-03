@@ -22,6 +22,15 @@ title: Loan Simulator
       <label class="reveal-active" for="graduation-date">Graduation Month:</label>
       <input class="graduation-date reveal-active" type="month" name="graduation-month" value="2020-05">
     </div>
+    <div class="monthly-payment">
+      <label for="monthly-payment">Monthly Payment:</label>
+      <input type = "number" class="monthly" name="monthlyPayment" min="1" step="0.01" />
+    </div>
+    <p>OR</p>
+    <div class="years-freedom">
+      <label for="years-freedom">Years until Freedom:</label>
+      <input type = "number" class="years" name="yearsFreedom" min="1" step="0.01" />
+    </div>
     </fieldset>
     <div class="button-block">
       <button type="button" class="btn btn-primary btn-circle btn-sm add-button">+</a>
