@@ -20,6 +20,32 @@ body {
   font-size: 15px;
 }
 
+.submit {
+
+clear: both;
+
+}
+
+.newLine {
+  padding: 0%
+  margin-left: 2%;
+  margin-top: 10px;
+  width: 22%;
+  text-align: center;
+  float: left;
+  background-color: #cacaca;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 10px;
+
+}
+
+
+
+.or {
+margin: 0px;
+padding: 0px;
+}
+
 .reveal-active {
   display: none;
 }
@@ -37,3 +63,25 @@ input[value="subsidized"]:checked ~ .reveal-active {
   bottom: 5vh;
   transform: translateX(-50%);
 }
+
+.lineInfo{
+  min-height: 20px;
+  padding: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom:20px;
+  background-color: #cacaca;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 10px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+  //width: 90%;
+}
+
+.container {
+  clear:right;
+  width: 75%;
+  margin-top: 10px;
+  text-align: center;
+  float: right;
+}
+

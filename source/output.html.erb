@@ -1,69 +1,138 @@
-<input id="monthlyPayment" placeholder="Enter monthly payment">
-<input id="numOfYears" placeholder="Enter number of years">
-<button type="button" onclick="submit()">submit</button>
+<div id="Graph"></div>
 
-<p id="demo"></p>
+<div class= "newLine">
+	<h3>New Loan</h3>
+	<input id="principal" placeholder="Amount Borrowed">	
+	<input id="subsidy" placeholder="Subsidy ">
+	<input id="rate" placeholder="Interest Rate">
+	<hr>
+	<input id="monthlyPayment" placeholder="Monthly payment">
+	<p class = "or">OR</p>
+	<input id="numOfYears" placeholder="# of years til freedom">	
+	<hr>
+<button type="button" class= "submit" onclick="submit()">submit</button>
+
+</div>
+
+
+
+
 
 <script>
 
 function submit() {
-	var x, y;
-
-	// Get the values of the input fields
-	x = document.getElementById("monthlyPayment").value;
-	y = document.getElementById("numOfYears").value;
+        var payment, years, subsidy, principal, rate;
+	
+        // Get the values of the input fields
+        payment = document.getElementById("monthlyPayment").value;
+        years = document.getElementById("numOfYears").value;
+	rate = document.getElementById("rate").value;
+	subsidy = document.getElementById("subsidy").value;
+	principal = document.getElementById("principal").value;
 
 	document.getElementById("demo").innerHTML = x + ", " + y;
+
+
 }
-</script>
 
-<div id="Graph"></div>
-
-
-<!-- Plotly.js -->
-<script>
-
+function makeChart() {
 var initial_data = JSON.parse(localStorage.getItem("loansArray"));
 
 var x_axis = [];
 
 var i, j;
-for (i=0; i< 30; i++) {
+for (i=0; i< 30; i+=.5) {
 	x_axis.push(i);
 	
 }
 
-var data = [];
 
-data.length = initial_data.length;
+	var data = [];
+
+	data.length = initial_data.length;
+
+	console.log(initial_data);
+	console.log(initial_data[0]);
+
+	for (i = 0; i< data.length; i++) {
 
 
+	principal = initial_data[i][0];
+	y_axis = [principal];
+	var compound = 365;
+	var interest_rate = initial_data[i][1]/100;
 
-console.log(initial_data);
-console.log(initial_data[0]);
+	for (j = 1; j < x_axis.length; j++) {
+		var val = y_axis[j-1]*Math.pow((1+interest_rate/compound), compound*.5)-6*50;
+		if (val > 0) {
+			y_axis.push(val);
+		} else {
 
-for (i = 0; i< data.length; i++) {
+			/*on first instance of this, update parameter of line in local storage that
+				tracks year paid off, this will be displayed in lineInfo div created
+				in the makeLineInfo function*/
+			y_axis.push(0);
+		}
+	}
 
-  y_axis = [initial_data[i][0]];
-  interest_val = initial_data[i][0];
-  
-  for (j = 0; j < x_axis.length -1; j++) {
-    interest_val*= (1 + initial_data[i][1]/100);
-    y_axis.push(interest_val);
-  }
 
-  var temp = {
-    x: x_axis,
-    y: y_axis,
-    type: 'scatter'
-  }
+		var temp = {
+			x: x_axis,
+			y: y_axis,
+			type: 'scatter',
+			name: "$" + principal + ", " + (interest_rate*100) + "%"
+		}
 
-  data[i] = temp; 
+		data[i] = temp; 
+	} 
+
+	Plotly.newPlot('Graph', data);
+
+	makeLineInfo();  
+
 }
 
-console.log(data);
+function makeLineInfo() {
 
-Plotly.newPlot('Graph', data);
+	var initial_data = JSON.parse(localStorage.getItem("loansArray"));
+
+	var container = document.createElement("DIV");
+	container.setAttribute("class", "container");
+	document.body.appendChild(container);	
+
+
+	var i;
+	for (i = 0; i<initial_data.length; i++) { 
+
+		var info = document.createElement("DIV");
+		info.setAttribute("class", "lineInfo");	
+
+		var title = document.createElement("H3");
+		title.innerText = "Line " + i;
+
+		//could try populating local storage items with this info
+		//	would keep data fields default or 0 for initial page info
+		var monthly_payment = document.createElement("P");
+		monthly_payment.innerText = "Monthly amount: "+50;
+ 
+		var yearFree = document.createElement("P");
+		yearFree.innerText = "Years until paid off: " + 0;
+		
+
+		var borrowed = document.createElement("P");
+		borrowed.innerText = "Amount Borrowed: " + initial_data[i][0];
+
+		info.appendChild(title);
+		info.appendChild(borrowed);
+		info.appendChild(yearFree);
+		info.appendChild(monthly_payment);
+		container.appendChild(info);
+	}
+	
+	
+}
+
+makeChart();
 
 </script>
 
