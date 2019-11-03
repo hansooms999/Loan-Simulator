@@ -29,9 +29,9 @@ function submit() {
 
 	/* We want this to add another array to localStorage array and populate it with 
 	these values*/	
-	payment = document.getElementById("monthlyPayment").value;
-	years = document.getElementById("numOfYears").value;
-	rate = document.getElementById("rate").value;
+	payment = parseFloat(document.getElementById("monthlyPayment").value);
+	years = parseFloat(document.getElementById("numOfYears").value);
+	rate = parseFloat(document.getElementById("rate").value);
 
 	var subsidizedVal = $(`input[name="subsidize"]:checked`).val();
 	if (subsidizedVal == "subsidized") {
@@ -39,9 +39,9 @@ function submit() {
 	} else {
 		subsidy = false;
 	}
-	principal = document.getElementById("principal").value;
-	monthlyPay = document.getElementById("monthlyPayment").value;
-	numOfYears = document.getElementById("numOfYears").value;
+	principal = parseFloat(document.getElementById("principal").value);
+	monthlyPay = parseFloat(document.getElementById("monthlyPayment").value);
+	numOfYears = parseFloat(document.getElementById("numOfYears").value);
 
 	array.push(principal);
 	array.push(rate);
