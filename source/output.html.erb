@@ -92,13 +92,30 @@ function makeChart() {
 	//can be potentially added as a feature in an "advanced" menu option
 	var compound = 365;
 
+
 	//50 dollars a month is standard minimum payment
-	var monthly_payment = 50;
+	var monthly_payment;
 	var interest_rate = initial_data[i][1]/100;
+
+	initial_data[i][4] = 20;
+	if (initial_data[i][4] != null) {
+
+
+		var d = (Math.pow((1+interest_rate/12), initial_data[i][4]*12) - 1)/(interest_rate/12*Math.pow((1+interest_rate/12), initial_data[i][4]*12));
+
+		monthly_payment = principal/d;
+		console.log(monthly_payment);
+		initial_data[i][5] = monthly_payment;
+
+        } else {
+		monthly_payment = initial_data[i][5];
+	}
 
 	//creates the y_axis values for individual array i in localStorage
 	for (j = 1; j < x_axis.length; j++) {
 		var val = y_axis[j-1]*Math.pow((1+interest_rate/(compound)), compound/12)-monthly_payment;
+
+
 		if (val > 0) {
 			y_axis.push(val);
 		} else {
@@ -157,10 +174,10 @@ function makeLineInfo() {
 		//could try populating local storage items with this info
 		//	would keep data fields default or 0 for initial page info
 		var monthly_payment = document.createElement("P");
-		monthly_payment.innerText = "Monthly amount: "+initial_data[i][5];
+		monthly_payment.innerText = "Monthly amount: "+ Math.round(initial_data[i][5]*100)/100;
  
 		var yearFree = document.createElement("P");
-		yearFree.innerText = "Years until paid off: " + (Math.round(initial_data[i][4]*100)/100);
+		yearFree.innerText = "Years until paid off: " + Math.round(initial_data[i][4]*100)/100;
 		
 
 		var borrowed = document.createElement("P");
