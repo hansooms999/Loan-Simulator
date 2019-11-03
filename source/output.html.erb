@@ -24,6 +24,10 @@
 <script>
 
 function submit() {
+
+	let c = $(".container")[0];
+	c.remove();
+
 	var payment, years, subsidy, principal, rate, month, monthlyPay, numOfYears;
 	var array = new Array();
 
