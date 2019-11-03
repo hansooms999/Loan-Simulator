@@ -47,7 +47,7 @@ function makeChart() {
 	var i, j;
 
 	//x-axis increments by .5
-	for (i=0; i< 30; i+=.5) {
+	for (i=0; i< 30; i+=(1/12)) {
 		x_axis.push(i);
 	
 	}
@@ -70,11 +70,13 @@ function makeChart() {
 	//can be potentially added as a feature in an "advanced" menu option
 	var compound = 365;
 
+	//50 dollars a month is standard minimum payment
+	var monthly_payment = 50;
 	var interest_rate = initial_data[i][1]/100;
 
 	//creates the y_axis values for individual array i in localStorage
 	for (j = 1; j < x_axis.length; j++) {
-		var val = y_axis[j-1]*Math.pow((1+interest_rate/compound), compound*.5)-6*50;
+		var val = y_axis[j-1]*Math.pow((1+interest_rate/(compound)), compound/12)-monthly_payment;
 		if (val > 0) {
 			y_axis.push(val);
 		} else {
