@@ -3,17 +3,17 @@ title: Loan Simulator
 ---
 
 <h1>Enter Loans</h1>
- <form target="output.html">
+ <form action="/output.html">
   <fieldset class="field-wrapper">
   <div class="loan-input">
     <h5>Loan 1:</h5>
     <div class="loan-balance">
       <label for="loan-balance">Loan Balance:</label>
-      <input type = "number" class="principal" name="principal" required />
+      <input type = "number" class="principal" name="principal" min="1" required />
     </div>
     <div class="interest-rate">
       <label for="interest-rate">Interest Rate:</label>
-      <input type = "number" class="interest" name="interestRate" required />
+      <input type = "number" class="interest" name="interestRate" max="100" min="1" required />
     </div>
     <div class="subsidized-option">
       <label for="subsidize-option">Subsidized:</label>
@@ -26,8 +26,6 @@ title: Loan Simulator
     <div class="button-block">
       <button type="button" class="btn btn-primary btn-circle btn-sm add-button">+</a>
     </div>
-    <div class="button-block">
-      <input type="submit" type="button"  class="btn btn-primary calculate-button" value="Calculate" onclick="sendData(); window.location.href='output.html'"></input>
-    </div>
+    <input href="output.html" type="submit" type="button"  class="btn btn-primary calculate-button" value="Calculate"></input>
   </div>
  </form>
