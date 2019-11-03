@@ -62,8 +62,8 @@ $(document).ready(function() {
         sub = false;
       }
       arr[i] = new Array(4);
-      arr[i][0] = principals[i].value;
-      arr[i][1] = interests[i].value;
+      arr[i][0] = parseFloat(principals[i].value);
+      arr[i][1] = parseFloat(interests[i].value);
       arr[i][2] = sub;
       arr[i][3] = date;
       //arr.push([principals[i].value, interests[i].value, sub, date]);
