@@ -1,16 +1,22 @@
 body {
-  background-color: #fbc547;
+  background-color: red;
   color: #333;
   font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir",
     "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans",
     "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu",
     "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
-  padding: 18vh 1rem;
+  //padding: 18vh 1rem;
   text-align: center;
 }
 
 .loan-input {
   margin: 20px;
+}
+
+.body {
+    width: 70%;
+    margin: auto;
+    background-color: white;
 }
 
 .btn-circle.btn-sm {
@@ -82,3 +88,6 @@ input[value="subsidized"]:checked ~ .reveal-active {
   float: right;
 }
 
+.header{
+    background-color: #cacaca;
+}
